@@ -11,8 +11,9 @@
 		D1DCBF232C00FD9C0089A821 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DCBF222C00FD9C0089A821 /* ContentView.swift */; };
 		D1DCBF252C00FD9F0089A821 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1DCBF242C00FD9F0089A821 /* Assets.xcassets */; };
 		D1DCBF282C00FD9F0089A821 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1DCBF272C00FD9F0089A821 /* Preview Assets.xcassets */; };
-		D1DCBF302C0103390089A821 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D1DCBF2F2C0103390089A821 /* FirebaseAuth */; };
 		D1DCBF342C0104A60089A821 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DCBF332C0104A60089A821 /* LoginView.swift */; };
+		D1DCBF372C1A21390089A821 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D1DCBF362C1A21390089A821 /* FirebaseAuth */; };
+		D1DCBF3B2C1A29500089A821 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1DCBF3A2C1A29500089A821 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		D1DCBF242C00FD9F0089A821 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D1DCBF272C00FD9F0089A821 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D1DCBF332C0104A60089A821 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		D1DCBF3A2C1A29500089A821 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,7 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D1DCBF302C0103390089A821 /* FirebaseAuth in Frameworks */,
+				D1DCBF372C1A21390089A821 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,6 +43,7 @@
 			children = (
 				D1DCBF1F2C00FD9C0089A821 /* PracticeSocialMedia */,
 				D1DCBF1E2C00FD9C0089A821 /* Products */,
+				D1DCBF352C1A21390089A821 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -55,6 +58,7 @@
 		D1DCBF1F2C00FD9C0089A821 /* PracticeSocialMedia */ = {
 			isa = PBXGroup;
 			children = (
+				D1DCBF3A2C1A29500089A821 /* GoogleService-Info.plist */,
 				D1DCBF322C0104650089A821 /* Model */,
 				D1DCBF312C0104540089A821 /* View */,
 				D1DCBF202C00FD9C0089A821 /* PracticeSocialMediaApp.swift */,
@@ -88,6 +92,13 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		D1DCBF352C1A21390089A821 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -105,7 +116,7 @@
 			);
 			name = PracticeSocialMedia;
 			packageProductDependencies = (
-				D1DCBF2F2C0103390089A821 /* FirebaseAuth */,
+				D1DCBF362C1A21390089A821 /* FirebaseAuth */,
 			);
 			productName = PracticeSocialMedia;
 			productReference = D1DCBF1D2C00FD9C0089A821 /* PracticeSocialMedia.app */;
@@ -154,6 +165,7 @@
 			files = (
 				D1DCBF282C00FD9F0089A821 /* Preview Assets.xcassets in Resources */,
 				D1DCBF252C00FD9F0089A821 /* Assets.xcassets in Resources */,
+				D1DCBF3B2C1A29500089A821 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,7 +397,7 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D1DCBF2F2C0103390089A821 /* FirebaseAuth */ = {
+		D1DCBF362C1A21390089A821 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D1DCBF2E2C0103390089A821 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;

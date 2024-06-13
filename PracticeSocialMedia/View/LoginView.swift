@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import PhotosUI
+import Firebase
 
 struct LoginView: View {
     //Mark: User Details
@@ -13,6 +15,8 @@ struct LoginView: View {
     @State var password: String = ""
     //Mark: View Properties
     @State var createAccount: Bool = false
+    @State var showError: Bool = false
+    @State var errorMessage: String = ""
     var body: some View {
         VStack(spacing: 10) {
             Text("Corata!")
@@ -33,17 +37,15 @@ struct LoginView: View {
                     .textContentType(.emailAddress)
                     .border(1, .gray.opacity(0.5))
                 
-                Button("Reset password?", action: {})
+                Button("Reset password?", action: resetPassword)
                     .font(.callout)
                     .fontWeight(.medium)
                     .tint(.black)
                     .hAlign(.trailing)
                 
-                Button {
-                    
-                } label: {
+                Button(action: loginUser) {
                     //Mark: Login Button
-                Text("Sign in")
+                    Text("Sign in")
                         .foregroundColor(.white)
                         .hAlign(.center)
                         .fillView(.black)
@@ -72,10 +74,45 @@ struct LoginView: View {
         .fullScreenCover(isPresented: $createAccount) {
             RegisterView()
         }
-                
+        // Mark: Displaying Alert
+        .alert(errorMessage, isPresented: $showError, actions: {})
+        
+    }
+    
+    func loginUser(){
+        Task {
+            do {
+                // With The Help of Swift Concurrency Auth Can Be Done With Single Line
+                try await Auth.auth().signIn(withEmail: emailID, password: password)
+                print("User Found")
+            }catch{
+                await setError(error)
+            }
         }
     }
-//Mark: Regsiter View
+    
+    func resetPassword() {
+        Task {
+            do {
+                // With The Help of Swift Concurrency Auth Can Be Done With Single Line
+                try await Auth.auth().sendPasswordReset(withEmail: emailID)
+                print("Link Sent")
+            }catch{
+                await setError(error)
+            }
+        }
+    }
+    
+    // Mark: Displaying Errors VIA Alert
+    func setError(_ error: Error) async {
+        // Mark: UI Must Be Updated On Main Thread
+        await MainActor.run(body: {
+            errorMessage = error.localizedDescription
+            showError.toggle()
+        })
+    }
+}
+// Mark: Regsiter View
 struct RegisterView: View {
     //Mark: User Details
     @State var emailID: String = ""
@@ -84,8 +121,12 @@ struct RegisterView: View {
     @State var userBio: String = ""
     @State var userBioLink: String = ""
     @State var userProfilePicData: Data?
-    //Mark: View Properties
+    // Mark: View Properties
     @Environment(\.dismiss) var dismiss
+    @State var showImagePicker: Bool = false
+    @State var photoItem: PhotosPickerItem?
+    @State var showError: Bool = false
+    @State var errorMessage: String = ""
     var body: some View {
         VStack(spacing: 10) {
             Text("Register Your\n    Account!")
@@ -96,7 +137,7 @@ struct RegisterView: View {
                 .font(.title3)
                 .hAlign(.center)
             
-            //Mark For Smaller Size Optimization
+            // Mark For Smaller Size Optimization
             ViewThatFits {
                 ScrollView(.vertical, showsIndicators: false) {
                     HelperView()
@@ -122,6 +163,23 @@ struct RegisterView: View {
         }
         .vAlign(.top)
         .padding(15)
+        .photosPicker(isPresented: $showImagePicker, selection: $photoItem)
+        .onChange(of: photoItem) { newValue in
+            // Mark: Extracting UIImage From PhotoItem
+            if let newValue {
+                Task {
+                    do {
+                        guard let imageData = try await newValue.loadTransferable(type: Data.self) else{return}
+                        // Mark: UI Must Be Updated On Main Thread
+                        await MainActor.run(body: {
+                            userProfilePicData = imageData
+                        })
+                    }catch{}
+                }
+            }
+        }
+        // Mark: Displaying Alert
+        .alert(errorMessage, isPresented: $showError, actions: {})
     }
     
     @ViewBuilder
@@ -141,12 +199,15 @@ struct RegisterView: View {
             .frame(width: 85, height: 85)
             .clipShape(Circle())
             .contentShape(Circle())
-            .padding(.top,25)
+            .onTapGesture {
+                showImagePicker.toggle()
+            }
+            .padding(.top, 25)
             
             TextField("Username", text: $userName)
                 .textContentType(.emailAddress)
                 .border(1, .gray.opacity(0.5))
-                .padding(.top,25)
+                .padding(.top, 25)
             
             TextField("Email", text: $emailID)
                 .textContentType(.emailAddress)
@@ -167,18 +228,26 @@ struct RegisterView: View {
                 .border(1, .gray.opacity(0.5))
                 .padding(.top,25)
             
-           
             
-            Button {
-                
-            } label: {
+            
+            Button(action: registerUser) {
                 //Mark: Login Button
-            Text("Sign up")
+                Text("Sign up")
                     .foregroundColor(.white)
                     .hAlign(.center)
                     .fillView(.black)
             }
             .padding(.top, 10)
+        }
+    }
+}
+
+func registerUser() {
+    Task {
+        do {
+            
+        }catch{
+//            await setError(error)
         }
     }
 }
