@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D18AF8852C1CA30E0060E6A7 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = D18AF8842C1CA30E0060E6A7 /* FirebaseFirestore */; };
+		D18AF8872C1CA30E0060E6A7 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D18AF8862C1CA30E0060E6A7 /* FirebaseFirestoreSwift */; };
+		D18AF8892C1CA30E0060E6A7 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = D18AF8882C1CA30E0060E6A7 /* FirebaseStorage */; };
+		D18AF88B2C20A2620060E6A7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18AF88A2C20A2620060E6A7 /* User.swift */; };
 		D1DCBF212C00FD9C0089A821 /* PracticeSocialMediaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DCBF202C00FD9C0089A821 /* PracticeSocialMediaApp.swift */; };
 		D1DCBF232C00FD9C0089A821 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DCBF222C00FD9C0089A821 /* ContentView.swift */; };
 		D1DCBF252C00FD9F0089A821 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1DCBF242C00FD9F0089A821 /* Assets.xcassets */; };
@@ -17,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D18AF88A2C20A2620060E6A7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D1DCBF1D2C00FD9C0089A821 /* PracticeSocialMedia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PracticeSocialMedia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1DCBF202C00FD9C0089A821 /* PracticeSocialMediaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeSocialMediaApp.swift; sourceTree = "<group>"; };
 		D1DCBF222C00FD9C0089A821 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -32,6 +37,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1DCBF372C1A21390089A821 /* FirebaseAuth in Frameworks */,
+				D18AF8892C1CA30E0060E6A7 /* FirebaseStorage in Frameworks */,
+				D18AF8852C1CA30E0060E6A7 /* FirebaseFirestore in Frameworks */,
+				D18AF8872C1CA30E0060E6A7 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +96,7 @@
 		D1DCBF322C0104650089A821 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D18AF88A2C20A2620060E6A7 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -117,6 +126,9 @@
 			name = PracticeSocialMedia;
 			packageProductDependencies = (
 				D1DCBF362C1A21390089A821 /* FirebaseAuth */,
+				D18AF8842C1CA30E0060E6A7 /* FirebaseFirestore */,
+				D18AF8862C1CA30E0060E6A7 /* FirebaseFirestoreSwift */,
+				D18AF8882C1CA30E0060E6A7 /* FirebaseStorage */,
 			);
 			productName = PracticeSocialMedia;
 			productReference = D1DCBF1D2C00FD9C0089A821 /* PracticeSocialMedia.app */;
@@ -176,6 +188,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D18AF88B2C20A2620060E6A7 /* User.swift in Sources */,
 				D1DCBF342C0104A60089A821 /* LoginView.swift in Sources */,
 				D1DCBF232C00FD9C0089A821 /* ContentView.swift in Sources */,
 				D1DCBF212C00FD9C0089A821 /* PracticeSocialMediaApp.swift in Sources */,
@@ -397,6 +410,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D18AF8842C1CA30E0060E6A7 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D1DCBF2E2C0103390089A821 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		D18AF8862C1CA30E0060E6A7 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D1DCBF2E2C0103390089A821 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+		D18AF8882C1CA30E0060E6A7 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D1DCBF2E2C0103390089A821 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
 		D1DCBF362C1A21390089A821 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D1DCBF2E2C0103390089A821 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

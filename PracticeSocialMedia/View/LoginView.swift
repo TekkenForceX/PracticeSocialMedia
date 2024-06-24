@@ -8,6 +8,8 @@
 import SwiftUI
 import PhotosUI
 import Firebase
+import FirebaseFirestore
+import FirebaseStorage
 
 struct LoginView: View {
     //Mark: User Details
@@ -237,20 +239,51 @@ struct RegisterView: View {
                     .hAlign(.center)
                     .fillView(.black)
             }
+            .disableWithOpacity(userName == "" || userBio == "" || emailID == "" || password == "" || userProfilePicData == nil)
             .padding(.top, 10)
         }
     }
-}
-
-func registerUser() {
-    Task {
-        do {
-            
-        }catch{
-//            await setError(error)
+    func registerUser() {
+        Task {
+            do {
+                // Step 1: Creating Firebase Account
+                try await Auth.auth().createUser(withEmail: emailID, password: password)
+                // Step 2: Uploading Profile Photo Into Firebase Storage
+                guard let userUID = Auth.auth().currentUser?.uid else{return}
+                guard let imageData = userProfilePicData else{return}
+                let storageRef = Storage.storage().reference().child("Profile_Images").child(userUID)
+                let _ = try await storageRef.putDataAsync(imageData)
+                // Step 3: Downloading Photo URL
+                let downloadURL = try await storageRef.downloadURL()
+                // Step 4: Creating A User Firestore Object
+                let user = User(username: userName, userBio: userBio, userBioLink: userBioLink, userUID: userUID, userEmail: emailID, userProfileURL: downloadURL)
+                // Step 5: Saving User Doc Into Firestore Database
+                let _ = try Firestore.firestore().collection("Users").document(userUID).setData(from: user, completion: {
+                    error in
+                    if error == nil {
+                        // Mark: Print Saved Successfully
+                        print("Saved Successfully")
+                    }
+                })
+            }catch{
+                // Mark: Delete Acocunt In The Event Of Failure
+//                try await Auth.auth().currentUser?.delete()
+                await setError(error)
+            }
         }
     }
+    // Mark: Displaying Errors VIA Alert
+    func setError(_ error: Error) async {
+        // Mark: UI Musk Be Updated On Main Thread
+        await MainActor.run(body: {
+            errorMessage = error.localizedDescription
+            showError.toggle()
+        })
+    }
 }
+
+
+
 
 
 #Preview {
@@ -259,6 +292,14 @@ func registerUser() {
 
 // Mark: View Extensions For UI Building
 extension View {
+    // Mark: Disabling with Opacity
+    func disableWithOpacity(_ condition: Bool) -> some View {
+        self
+            .disabled(condition)
+            .opacity(condition ? 0.6 : 1)
+    }
+    
+    
     func hAlign(_ alignment: Alignment) ->some View {
         self
             .frame(maxWidth: .infinity, alignment: alignment)
