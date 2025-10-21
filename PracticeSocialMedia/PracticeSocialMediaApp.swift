@@ -6,16 +6,25 @@
 //
 
 import SwiftUI
-import Firebase
+import FirebaseCore
 
 @main
-struct PracticeSocialMediaApp: App {
+struct YourApp: App {
+    @StateObject var authViewModel = AuthViewModel()
+
     init() {
         FirebaseApp.configure()
     }
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if authViewModel.isSignedIn {
+                HomeView()
+                    .environmentObject(authViewModel)
+            } else {
+                LoginView()
+                    .environmentObject(authViewModel)
+            }
         }
     }
 }
