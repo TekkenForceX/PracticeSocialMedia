@@ -381,7 +381,7 @@ struct LoginView: View {
     @State private var errorMessage = ""
 
     var body: some View {
-        VStack(spacing: 10) {
+        VStack(spacing: 5) {
             Text("Already have an account with us?")
                 .font(.largeTitle.bold())
                 .hAlign(.center)
